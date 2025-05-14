@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  db:
+    image: mini_blog_db
+    container_name: mini_blog_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: blog
+    secrets:
+    - db_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/src/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  backend:
+    image: mini_blog_backend
+    container_name: mini_blog_backend
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      DB_NAME: blog
+    secrets:
+    - db_password
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+
+  frontend:
+    image: mini_blog_frontend
+    container_name: mini_blog_frontend
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    # Si besoin de personnaliser NGINX :
+    # volumes:
+    #   - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+volumes:
+  pgdata:
+
+secrets:
+  db_password:
+    external: true
+  

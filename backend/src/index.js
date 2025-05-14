@@ -22,6 +22,9 @@ const pool = new Pool({
 // Routes
 app.get('/api/posts', async (req, res) => {
   try {
+    console.log('user ' + process.env.DB_USER);
+    console.log('password ' + process.env.DB_PASSWORD);
+    console.log("🔍 DB_PASSWORD:", JSON.stringify(process.env.DB_PASSWORD));
     const result = await pool.query('SELECT * FROM posts ORDER BY id DESC');
     res.json(result.rows);
   } catch (error) {

@@ -24,5 +24,3 @@ pgdata/
 # OS
 Thumbs.db
 
-**/Dockerfile*
-**/docker-compose.yml*
