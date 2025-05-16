@@ -1,0 +1,27 @@
+{
+  "name": "monorepodevopsinitiation",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/MKertane/MonoRepoDevOpsInitiation#readme",
+  "bugs": {
+    "url": "https://github.com/MKertane/MonoRepoDevOpsInitiation/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MKertane/MonoRepoDevOpsInitiation.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "husky": "^9.1.7"
+  }
+}
